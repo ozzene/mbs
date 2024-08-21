@@ -12,44 +12,69 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+        child: Column(
+          children: [
                 _buildHeader(),
-                const SizedBox(height: 20),
-                _buildBestSalonService(),
-                const SizedBox(height: 20),
-                _buildChooseYourBarber(),
-                const SizedBox(height: 20),
-                _buildPopularCategory(),
-              ],
+            Expanded(
+              child: ListView(
+                children: [Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      _buildBestSalonService(),
+                      const SizedBox(height: 20),
+                      _buildChooseYourBarber(),
+                      const SizedBox(height: 20),
+                      _buildPopularCategory(),
+                    ],
+                  ),
+                ),
+                ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildHeader() {
-    return const Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(0.0),
+      topRight: Radius.circular(0.0),
+      bottomLeft: Radius.circular(30.0),
+      bottomRight: Radius.circular(30.0),), // Adjust the radius as needed
+      child: Container(
+        color: Colors.amber,
+        height: 100,
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Hi, Atta', style: TextStyle(fontSize: 18)),
-            Text('Good Afternoon',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Hi, Atta', style: TextStyle(fontSize: 18)),
+                  SizedBox(height: 10,),
+                  Text('Good Afternoon',
+                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: CircleAvatar(
+                backgroundColor: Colors.grey,
+                child: Text('A', style: TextStyle(color: Colors.white)),
+              ),
+            ),
           ],
         ),
-        CircleAvatar(
-          backgroundColor: Colors.grey,
-          child: Text('A', style: TextStyle(color: Colors.white)),
-        ),
-      ],
+      ),
     );
   }
 
