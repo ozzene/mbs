@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mbs/src/screens/categories_screen.dart';
 import 'package:mbs/src/screens/chat_screen.dart';
 import 'package:mbs/src/screens/home_screen.dart';
+import 'package:mbs/src/screens/map_screen.dart';
 import 'package:mbs/src/screens/messages_screen.dart';
-
-
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -19,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const HomePage(),
-    Container(),
+    const MapScreen(),
     const CategoryPage(),
     const MessageScreen(),
     const MessagingChatScreen()
