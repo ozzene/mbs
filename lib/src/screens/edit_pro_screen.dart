@@ -18,7 +18,7 @@ class EditProfileScreen extends StatelessWidget {
             _buildProfileHeader(),
             const Divider(),
             _buildEditableInfoTile(Icons.person, 'Name', 'Molnah'),
-            _buildEditableInfoTile(Icons.business, 'Category', 'Make Up'),
+            _buildEditableInfoTile(Icons.business, 'Catelog', 'Haircuts, ''Everyday Makeup'),
             _buildEditableInfoTile(Icons.location_on, 'Business address', ''),
             _buildEditableInfoTile(Icons.language, 'Website', ''),
             _buildAddAnotherWebsite(),
