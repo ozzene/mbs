@@ -8,96 +8,165 @@ class MessagingChatScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Olivia Grant'),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+              children: [
+                _buildReceivedMessage(
+                  message: 'Hi, I\'m doing good, thanks for asking. Have you made any plans for vacation yet?',
+                  time: '12:10',
+                ),
+                const SizedBox(height: 10),
+                _buildSentMessage(
+                  message: 'What if we take a vacation to Bromo?',
+                  time: '12:12',
+                ),
+                // Add more messages here
+              ],
+            ),
+          ),
+          _buildMessageInput(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildReceivedMessage({required String message, required String time}) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.only(right: 50),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromARGB(31, 33, 33, 33),
+              offset: Offset(0, 1),
+              blurRadius: 5,
+            ),
+          ],
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: ListView(
-                children: [
-                  _buildChatItem(
-                    name: 'Olivia Grant',
-                    time: '12:10',
-                    message: 'Hi, I\'m doing good, thanks for asking. Have you made any plans for vacation yet?',
-                    isTyping: false,
-                  ),
-                  const SizedBox(height: 10),
-                  _buildChatItem(
-                    name: 'Olivia Grant',
-                    time: '12:12',
-                    message: 'What if we take a vacation to Bromo?',
-                    isTyping: false,
-                  ),
-                ],
+            Text(message),
+            const SizedBox(height: 5),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                time,
+                style: TextStyle(fontSize: 10, color: Colors.grey[600]),
               ),
             ),
-            _buildMessageInput(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildChatItem({
-    required String name,
-    required String time,
-    required String message,
-    required bool isTyping,
-  }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        CircleAvatar(
-          backgroundColor: Colors.grey,
-          child: Text(name[0]),
+  Widget _buildSentMessage({required String message, required String time}) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        margin: const EdgeInsets.only(left: 50),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 169, 165, 165),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              offset: Offset(0, 1),
+              blurRadius: 5,
+            ),
+          ],
         ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                  Text(time),
-                ],
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(message),
+            const SizedBox(height: 5),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                time,
+                style: TextStyle(fontSize: 10, color: Colors.grey[600]),
               ),
-              const SizedBox(height: 4),
-              Text(message),
-              if (isTyping) const SizedBox(height: 4),
-              if (isTyping)
-                Row(
-                  children: List.generate(3, (_) => const CircleAvatar(radius: 4, backgroundColor: Colors.grey)),
-                ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
   Widget _buildMessageInput() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(20),
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
       child: Row(
         children: [
-          const Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Type a message',
-                border: InputBorder.none,
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black12,
+                    offset: Offset(0, 1),
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.emoji_emotions_outlined, color: Colors.grey),
+                    onPressed: () {},
+                  ),
+                  const Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Type a message',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.attach_file, color: Colors.grey),
+                    onPressed: () {},
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.camera_alt, color: Colors.grey),
+                    onPressed: () {},
+                  ),
+                ],
               ),
             ),
           ),
-          IconButton(
-            icon: const Icon(Icons.send),
-            onPressed: () {},
+          const SizedBox(width: 5),
+          Container(
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 0, 0, 0),
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  offset: Offset(0, 1),
+                  blurRadius: 5,
+                ),
+              ],
+            ),
+            child: IconButton(
+              icon: const Icon(Icons.send, color: Colors.white),
+              onPressed: () {},
+            ),
           ),
         ],
       ),

@@ -11,6 +11,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+           appBar: AppBar(
+              title: const Text('Hi, Atta', style: TextStyle(fontSize: 18,color: Colors.white)),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -39,44 +43,54 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  Widget _buildHeader() {
-    return ClipRRect(
-      borderRadius: const BorderRadius.only(
+Widget _buildHeader() {
+  return ClipRRect(
+    borderRadius: const BorderRadius.only(
       topLeft: Radius.circular(0.0),
       topRight: Radius.circular(0.0),
-      bottomLeft: Radius.circular(30.0),
-      bottomRight: Radius.circular(30.0),), // Adjust the radius as needed
-      child: Container(
-        color: Colors.amber,
-        height: 100,
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Hi, Atta', style: TextStyle(fontSize: 18)),
-                  SizedBox(height: 10,),
-                  Text('Good Afternoon',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(16.0),
-              child: CircleAvatar(
-                backgroundColor: Colors.grey,
-                child: Text('A', style: TextStyle(color: Colors.white)),
-              ),
-            ),
-          ],
-        ),
+      bottomLeft: Radius.circular(15.0),
+      bottomRight: Radius.circular(15.0),
+    ),
+    child: Container(
+      decoration: const BoxDecoration(
+        color: Colors.black,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26, // Shadow color
+            offset: Offset(0, 4),  // Horizontal and vertical offset
+            blurRadius: 10.0,      // Blur radius
+          ),
+        ],
       ),
-    );
-  }
+      height: 50, // Adjust the height as needed
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Good Afternoon',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: CircleAvatar(
+              backgroundColor: Colors.grey,
+              child: Text('A', style: TextStyle(color: Colors.white)),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
 
   Widget _buildBestSalonService() {
     return Column(
@@ -87,7 +101,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text('Best Salon Service',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Text('View All', style: TextStyle(color: Colors.blue)),
+            // Text('View All', style: TextStyle(color: Colors.blue)),
           ],
         ),
         const SizedBox(height: 10),
@@ -148,7 +162,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text('Choose Your Barber',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Text('View All', style: TextStyle(color: Colors.blue)),
+            // Text('View All', style: TextStyle(color: Colors.blue)),
           ],
         ),
         const SizedBox(height: 10),
