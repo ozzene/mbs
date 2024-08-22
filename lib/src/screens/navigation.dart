@@ -5,6 +5,7 @@ import 'package:mbs/src/screens/edit_pro_screen.dart';
 import 'package:mbs/src/screens/home_screen.dart';
 import 'package:mbs/src/screens/map_screen.dart';
 import 'package:mbs/src/screens/profile_screen.dart';
+import 'package:mbs/src/screens/service_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
     const MapScreen(),
     const CategoryPage(),
     const EditProfileScreen(),
-    const ProfileScreen(),
+    const AddServiceScreen()
   ];
 
   void _onItemTapped(int index) {
