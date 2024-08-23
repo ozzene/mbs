@@ -4,7 +4,6 @@ import 'package:mbs/src/screens/categories_screen.dart';
 import 'package:mbs/src/screens/edit_pro_screen.dart';
 import 'package:mbs/src/screens/home_screen.dart';
 import 'package:mbs/src/screens/map_screen.dart';
-import 'package:mbs/src/screens/profile_screen.dart';
 import 'package:mbs/src/screens/service_screen.dart';
 
 class MainScreen extends StatefulWidget {
