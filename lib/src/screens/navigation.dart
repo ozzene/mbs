@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, unused_element
 import 'package:flutter/material.dart';
+import 'package:mbs/src/screens/book_screen.dart';
+import 'package:mbs/src/screens/bookings_management_screen.dart';
 import 'package:mbs/src/screens/categories_screen.dart';
-import 'package:mbs/src/screens/edit_pro_screen.dart';
 import 'package:mbs/src/screens/home_screen.dart';
 import 'package:mbs/src/screens/map_screen.dart';
-import 'package:mbs/src/screens/service_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -20,8 +20,8 @@ class _MainScreenState extends State<MainScreen> {
     const HomePage(),
     const MapScreen(),
     const CategoryPage(),
-    const EditProfileScreen(),
-    const AddServiceScreen()
+     BookingRequestScreen(),
+    const BookingScreen(),
   ];
 
   void _onItemTapped(int index) {

@@ -11,30 +11,34 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-           appBar: AppBar(
-              title: const Text('Hi, Atta', style: TextStyle(fontSize: 18,color: Colors.white)),
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      appBar: AppBar(
+        title: const Text(
+          'Hi, Atta',
+          style: TextStyle(fontSize: 18, color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              // Implement search action here
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
           children: [
-                _buildHeader(),
+            _buildSearchBar(),
             Expanded(
               child: ListView(
-                children: [Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      _buildBestSalonService(),
-                      const SizedBox(height: 20),
-                      _buildChooseYourBarber(),
-                      const SizedBox(height: 20),
-                      _buildPopularCategory(),
-                    ],
-                  ),
-                ),
+                padding: const EdgeInsets.all(16.0),
+                children: [
+                  _buildBestSalonService(),
+                  const SizedBox(height: 20),
+                  _buildChooseYourBarber(),
+                  const SizedBox(height: 20),
+                  _buildPopularCategory(),
                 ],
               ),
             ),
@@ -43,77 +47,42 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-Widget _buildHeader() {
-  return ClipRRect(
-    borderRadius: const BorderRadius.only(
-      topLeft: Radius.circular(0.0),
-      topRight: Radius.circular(0.0),
-      bottomLeft: Radius.circular(15.0),
-      bottomRight: Radius.circular(15.0),
-    ),
-    child: Container(
-      decoration: const BoxDecoration(
-        color: Colors.black,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26, // Shadow color
-            offset: Offset(0, 4),  // Horizontal and vertical offset
-            blurRadius: 10.0,      // Blur radius
-          ),
-        ],
-      ),
-      height: 50, // Adjust the height as needed
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Good Afternoon',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold,color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: CircleAvatar(
-              backgroundColor: Colors.grey,
-              child: Text('A', style: TextStyle(color: Colors.white)),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
 
+  Widget _buildSearchBar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+      child: TextField(
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.grey[200],
+          prefixIcon: const Icon(Icons.search, color: Colors.black),
+          hintText: 'Search',
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+            borderSide: BorderSide.none,
+          ),
+          contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+        ),
+      ),
+    );
+  }
 
   Widget _buildBestSalonService() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Best Salon Service',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            // Text('View All', style: TextStyle(color: Colors.blue)),
-          ],
+        const Text(
+          'Best Salon Service',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 10),
         SingleChildScrollView(
-          physics: const  BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: ["", "", "", "", ""]
-                .asMap()
-                .entries
-                .map((e) => _buildSalonCard('ABC Hair Saloon', 'Bun Cut', 3.6))
-                .toList(),
+            children: List.generate(5, (index) {
+              return _buildSalonCard('ABC Hair Saloon', 'Bun Cut', 3.6);
+            }),
           ),
         ),
       ],
@@ -123,7 +92,7 @@ Widget _buildHeader() {
   Widget _buildSalonCard(String title, String subtitle, double rating,
       {Color color = Colors.white}) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width/3,
+      width: MediaQuery.of(context).size.width / 3,
       child: Card(
         color: color,
         child: Padding(
@@ -157,24 +126,18 @@ Widget _buildHeader() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('Choose Your Barber',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            // Text('View All', style: TextStyle(color: Colors.blue)),
-          ],
+        const Text(
+          'Choose Your Barber',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 10),
-       SingleChildScrollView(
-          physics: const  BouncingScrollPhysics(),
+        SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: ["", "", "", "", "","", "", "", "", ""]
-                .asMap()
-                .entries
-                .map((e) => _buildBarberAvatar('John Deo'))
-                .toList(),
+            children: List.generate(10, (index) {
+              return _buildBarberAvatar('John Doe');
+            }),
           ),
         ),
       ],
@@ -183,7 +146,7 @@ Widget _buildHeader() {
 
   Widget _buildBarberAvatar(String name) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width/5,
+      width: MediaQuery.of(context).size.width / 5,
       child: Column(
         children: [
           const CircleAvatar(
@@ -201,8 +164,10 @@ Widget _buildHeader() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Popular Category',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        const Text(
+          'Popular Category',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
         const SizedBox(height: 10),
         Card(
           child: Padding(
@@ -222,10 +187,11 @@ Widget _buildHeader() {
                 const Text('Bun Cut'),
                 const Text('Price ₹250'),
                 Row(
-                    children: List.generate(
-                        5,
-                        (index) => const Icon(Icons.star,
-                            color: Colors.yellow, size: 16))),
+                  children: List.generate(5, (index) {
+                    return const Icon(Icons.star,
+                        color: Colors.yellow, size: 16);
+                  }),
+                ),
               ],
             ),
           ),
