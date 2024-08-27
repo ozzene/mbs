@@ -1,23 +1,59 @@
+// ignore_for_file: prefer_const_constructors
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:mbs/src/screens/navigation.dart';
+import 'package:flutter/gestures.dart';
+import 'package:get/get.dart';
+import 'package:flutter/services.dart';
+import 'package:mbs/controller/theme_controller.dart';
+import 'package:mbs/helper/route_helper.dart';
+import 'package:mbs/theme/dark_theme.dart';
+import 'package:mbs/theme/light_theme.dart';
+import 'package:mbs/util/app_constants.dart';
+import 'package:mbs/view/screens/root/no_found_screen.dart';
+import 'helper/di.dart' as di;
 
-
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+   await di.init();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(DevicePreview(
+      enabled: true,
+       builder: (BuildContext context) { return MyApp(); },));
+  });
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({Key? key, }) : super(key: key);
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Salon App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: const MainScreen(),
-    );
+    return GetBuilder<ThemeController>(builder: (themeController) {
+      return GetMaterialApp(
+         useInheritedMediaQuery: true,
+      builder: DevicePreview.appBuilder,
+        title: AppConstants.appName,
+        debugShowCheckedModeBanner: false,
+        navigatorKey: Get.key,
+        theme: themeController.darkTheme ? dark : light,
+        fallbackLocale: Locale(
+          AppConstants.languages[0].languageCode!,
+          AppConstants.languages[0].countryCode,
+        ),
+        initialRoute: RouteHelper.splash,
+        getPages: RouteHelper.routes,
+        unknownRoute: GetPage(
+          name: '/',
+          page: () => const NotFoundScreen(),
+        ),
+        defaultTransition: Transition.topLevel,
+        transitionDuration: const Duration(milliseconds: 500),
+        scrollBehavior: const MaterialScrollBehavior().copyWith(
+          dragDevices: {PointerDeviceKind.mouse, PointerDeviceKind.touch},
+        ),
+      );
+    });
   }
 }
+
